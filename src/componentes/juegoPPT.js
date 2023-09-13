@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
 import piedra from "../imagenes/piedra.jpg"
 import papel from "../imagenes/papel.jpg"
 import tijera from "../imagenes/tijera.jpg"
@@ -7,7 +8,10 @@ import resetear from "../imagenes/Resetiar.jpg"
 // variables: 
 let cantGanadaComputadora=0;
 let cantGanadaUsuario=0;
-const opcinesJuego=["piedra","papel","tijeras"];
+let jugadaComputadora;
+let jugadaUsuario;
+let ganadorPrevio;
+const opcinesJuego=["piedra","papel","tijera"];
 const posibleJugada=["Empate","Gana la computadora","Gana el usuario"];
 //const nombreJugador=document.getElementById("nombre");
 
@@ -34,52 +38,49 @@ function determinarGanador(jugadaComputadora,jugadaUsuario){
     return resultado;
 }
 
+//funcion jugabilidad
 function jugarPiedraPapelTijera(jugadaUsuario){
-    
-    /*Validación de Campo Nombre del usuario
-    if(nombreJugador.value==""){
-        alert("Error Debe ingresar un nombre al usuario");
-        return;
-    }*/
     //Variables locales de la Fución
-    let ganadorPrevio;
-    let jugadaComputadora= obtenerJugadaComputadora();       
-    /*imprimir la jugada
-    document.getElementById("jugadaPC").innerHTML="La computadora eligio: "+jugadaComputadora;
-    document.getElementById("jugadaUsuario").innerHTML="El usuario eligio: "+jugadaUsuario;*/
-   //variable de quien gano
-   ganadorPrevio=determinarGanador(jugadaComputadora,jugadaUsuario);
-   if(ganadorPrevio===posibleJugada[1]){
+    console.log("usuario elegio:"+jugadaUsuario);
+    jugadaComputadora= obtenerJugadaComputadora(); 
+    console.log("la computadora elegio:"+ jugadaComputadora);      
+    //determinación del ganador
+    ganadorPrevio=determinarGanador(jugadaComputadora,jugadaUsuario);
+    if(ganadorPrevio===posibleJugada[1]){
        cantGanadaComputadora+=1;
-   }else if(ganadorPrevio===posibleJugada[2]){
+    }else if(ganadorPrevio===posibleJugada[2]){
        cantGanadaUsuario+=1;
-   }
-   /*document.getElementById("jugada").innerHTML="La computadora: "+cantGanadaComputadora+" y el usuario: "+cantGanadaUsuario;
-   if(cantGanadaComputadora===3){
-   
-        document.getElementById("resultado").innerHTML="Perdiste el juego "+ nombreJugador.value +" para la proxima";
-        eleccionPiedra.classList.remove('disabled');
-        eleccionPapel.classList.remove('disabled');
-        eleccionTijera.classList.remove('disabled');
-    } 
-    if(cantGanadaUsuario===3){
-        
-        document.getElementById("resultado").innerHTML="Ganaste "+ nombreJugador.value +" Felicitaciones...!!!";
-        eleccionPiedra.classList.remove('disabled');
-        eleccionPapel.classList.remove('disabled');
-        eleccionTijera.classList.remove('disabled');
-    }*/
+    }
+    console.log("La computadora: "+cantGanadaComputadora+" y el usuario: "+cantGanadaUsuario);
+    
 }
-
-
 
 // Función de React
 function JuegoPPT(){
     //Variables locales de la Fución
+    const [impJuCompu, setImpJuCompu]=useState("no definido");
+    const [impJuUsuario, setImpJuUsuario]=useState("no definido");
+    const [impGanador, setimpGanador] = useState("no definido")
     const opcionJugar=(a)=>{
-        jugarPiedraPapelTijera(a);
-    }
-    
+        jugadaUsuario=a;
+        jugarPiedraPapelTijera(jugadaUsuario);
+        if(jugadaComputadora==opcinesJuego[0]){
+            setImpJuCompu("piedra");
+        }else if(jugadaComputadora==opcinesJuego[1]){
+            setImpJuCompu("papel");
+        }else if(jugadaComputadora==opcinesJuego[2]){
+            setImpJuCompu("tijera");
+        }
+        if(jugadaUsuario==opcinesJuego[0]){
+            setImpJuUsuario("piedra");
+        }else if(jugadaUsuario==opcinesJuego[1]){
+            setImpJuUsuario("papel");
+        }else if(jugadaUsuario==opcinesJuego[2]){
+            setImpJuUsuario("tijera");
+        }
+        setimpGanador("La computadora: "+cantGanadaComputadora+" y el usuario: "+cantGanadaUsuario);
+    };
+  
     return(
         <form>
             <p>Nombre del jugador: </p>
@@ -88,9 +89,8 @@ function JuegoPPT(){
                 <button id="piedra" onClick={()=> opcionJugar("piedra")} type="button" >
                     <img src={piedra} alt="una piedra"/>                 
                 </button>
-
                 <button id="papel" onClick={()=> opcionJugar("papel")} type="button">
-                    <img src={papel} alt="una papel"/>
+                    <img src={papel} alt="un papel"/>
                 </button>
                 <button id="tijera" onClick={()=> opcionJugar("tijera")} type="button">
                     <img src={tijera} alt="una tijera"/>
@@ -99,12 +99,12 @@ function JuegoPPT(){
                     <img src={resetear} alt="resetear"/>
                 </button>
             </div>
-            <p></p>
-            <p id="jugadaUsuario" />
-            <p id="jugada" />
-            <p id="resultado" />
+            <p>La computadora elegio: {impJuCompu}</p>
+            <p>El Usuario elegio: {impJuUsuario} </p>
+            <p>El ganador es: {impGanador}</p>
         </form>
         
     );
 }
+//hacer otra funcion  imprimir mensaje para exportarla App
 export default JuegoPPT;
