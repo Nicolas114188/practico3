@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
+import React, { useRef, useState } from "react";
 import piedra from "../imagenes/piedra.jpg"
 import papel from "../imagenes/papel.jpg"
 import tijera from "../imagenes/tijera.jpg"
@@ -58,53 +57,80 @@ function jugarPiedraPapelTijera(jugadaUsuario){
 // Función de React
 function JuegoPPT(){
     //Variables locales de la Fución
+    const form=useRef();
     const [impJuCompu, setImpJuCompu]=useState("no definido");
     const [impJuUsuario, setImpJuUsuario]=useState("no definido");
-    const [impGanador, setimpGanador] = useState("no definido")
+    const [impGanador, setimpGanador] = useState("no definido");
+    const [nombre, setnombre] = useState("");
     const opcionJugar=(a)=>{
         jugadaUsuario=a;
         jugarPiedraPapelTijera(jugadaUsuario);
-        if(jugadaComputadora==opcinesJuego[0]){
+        //setea el la jugada de la compu dependiendo si es piedra o papel o tijera
+        if(jugadaComputadora===opcinesJuego[0]){
             setImpJuCompu("piedra");
-        }else if(jugadaComputadora==opcinesJuego[1]){
+        }else if(jugadaComputadora===opcinesJuego[1]){
             setImpJuCompu("papel");
-        }else if(jugadaComputadora==opcinesJuego[2]){
+        }else if(jugadaComputadora===opcinesJuego[2]){
             setImpJuCompu("tijera");
         }
-        if(jugadaUsuario==opcinesJuego[0]){
+        //setea el la jugada del usuario dependiendo si es piedra o papel o tijera
+        if(jugadaUsuario===opcinesJuego[0]){
             setImpJuUsuario("piedra");
-        }else if(jugadaUsuario==opcinesJuego[1]){
+        }else if(jugadaUsuario===opcinesJuego[1]){
             setImpJuUsuario("papel");
-        }else if(jugadaUsuario==opcinesJuego[2]){
+        }else if(jugadaUsuario===opcinesJuego[2]){
             setImpJuUsuario("tijera");
         }
-        setimpGanador("La computadora: "+cantGanadaComputadora+" y el usuario: "+cantGanadaUsuario);
-    };
-  
+        setimpGanador("La computadora: "+cantGanadaComputadora+" y "+nombre+": "+cantGanadaUsuario);
+        if(cantGanadaComputadora===3){
+            setimpGanador("Perdiste sera para la proxima");
+            
+        }
+        if(cantGanadaUsuario===3){
+            setimpGanador("Ganaste felicitaciones "+nombre);
+            
+        }
+    }
+    const reinicio=()=>{
+       /* form.reset();*/
+
+         setnombre("");
+        cantGanadaComputadora=0;
+        cantGanadaUsuario=0;
+        setImpJuCompu("no definido");
+        setImpJuUsuario("no definido");
+        setimpGanador("no definido");
+    }
+    const nombreUsuario=({target})=>{
+        setnombre(target.value);
+    }
+    
+    //console.log("Yo soy "+nombre);
     return(
-        <form>
+        <form ref={form}> 
             <p>Nombre del jugador: </p>
-            <input id="nombre" type="text" />
-            <div className="grupo-btn">
-                <button id="piedra" onClick={()=> opcionJugar("piedra")} type="button" >
+            <input id="nombre" type="text" value={nombre} onChange={nombreUsuario}/>
+            
+            <div className="grupo-btn">           
+                <button id="piedra" onClick={()=> opcionJugar("piedra")}  type="button" >
                     <img src={piedra} alt="una piedra"/>                 
                 </button>
-                <button id="papel" onClick={()=> opcionJugar("papel")} type="button">
+                <button id="papel" onClick={()=> opcionJugar("papel")}  type="button">
                     <img src={papel} alt="un papel"/>
                 </button>
-                <button id="tijera" onClick={()=> opcionJugar("tijera")} type="button">
+                <button id="tijera" onClick={()=> opcionJugar("tijera")}  type="button">
                     <img src={tijera} alt="una tijera"/>
                 </button>
-                <button id="resetiar" type="reset">
+                <button id="resetiar" type="reset" onClick={()=>reinicio}>
                     <img src={resetear} alt="resetear"/>
                 </button>
             </div>
             <p>La computadora elegio: {impJuCompu}</p>
             <p>El Usuario elegio: {impJuUsuario} </p>
-            <p>El ganador es: {impGanador}</p>
-        </form>
-        
+            <p>El Resultado es: {impGanador}</p>
+            {(nombre==="")&&(alert("Debe ingresar un Nombre"))}
+        </form> 
     );
 }
-//hacer otra funcion  imprimir mensaje para exportarla App
+
 export default JuegoPPT;
