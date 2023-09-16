@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 import logo from "./imagenes/LogoJuegoTP3.jpg";
 import JuegoPPT from "./componentes/JuegoPPT.js";
 

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import "./JuegoPPT.css";
 import piedra from "../imagenes/piedra.jpg"
 import papel from "../imagenes/papel.jpg"
 import tijera from "../imagenes/tijera.jpg"
@@ -84,16 +85,20 @@ function JuegoPPT(){
         setimpGanador("La computadora: "+cantGanadaComputadora+" y "+nombre+": "+cantGanadaUsuario);
         if(cantGanadaComputadora===3){
             setimpGanador("Perdiste sera para la proxima");
-            reinicio();
+            cantGanadaComputadora=0;
+            cantGanadaUsuario=0;
+            setImpJuCompu("no definido");
+            setImpJuUsuario("no definido");
         }
         if(cantGanadaUsuario===3){
             setimpGanador("Ganaste felicitaciones "+nombre);
-            reinicio();
+            cantGanadaComputadora=0;
+            cantGanadaUsuario=0;
+            setImpJuCompu("no definido");
+            setImpJuUsuario("no definido");
         }
     }
     const reinicio=()=>{
-       /* form.reset();*/
-        console.log("ESTOY EN EL REINICIO")
          setnombre("");
         cantGanadaComputadora=0;
         cantGanadaUsuario=0;
@@ -105,12 +110,13 @@ function JuegoPPT(){
         setnombre(target.value);
     }
     
-    //console.log("Yo soy "+nombre);
     return(
-        <form ref={form}> 
-            <p>Nombre del jugador: </p>
-            <input id="nombre" type="text" value={nombre} onChange={nombreUsuario}/>
-            
+        <form ref={form}>
+            <div className="Nombre-jugador"> 
+                <p>Nombre del jugador: </p>
+                <input id="nombre" type="text" value={nombre} onChange={nombreUsuario}/>
+                
+            </div>
             <div className="grupo-btn">           
                 <button id="piedra" onClick={()=> opcionJugar("piedra")}  type="button" >
                     <img src={piedra} alt="una piedra"/>                 
@@ -125,9 +131,11 @@ function JuegoPPT(){
                     <img src={resetear} alt="resetear"/>
                 </button>
             </div>
-            <p>La computadora elegio: {impJuCompu}</p>
-            <p>El Usuario elegio: {impJuUsuario} </p>
-            <p>El Resultado es: {impGanador}</p>
+            <div>
+                <p>La computadora elegio: {impJuCompu}</p>
+                <p>El Usuario elegio: {impJuUsuario} </p>
+                <p>El Resultado es: {impGanador}</p>
+            </div>
             {(nombre==="")&&(alert("Debe ingresar un Nombre"))}
         </form> 
     );
