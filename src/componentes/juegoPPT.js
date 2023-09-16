@@ -84,16 +84,16 @@ function JuegoPPT(){
         setimpGanador("La computadora: "+cantGanadaComputadora+" y "+nombre+": "+cantGanadaUsuario);
         if(cantGanadaComputadora===3){
             setimpGanador("Perdiste sera para la proxima");
-            
+            reinicio();
         }
         if(cantGanadaUsuario===3){
             setimpGanador("Ganaste felicitaciones "+nombre);
-            
+            reinicio();
         }
     }
     const reinicio=()=>{
        /* form.reset();*/
-
+        console.log("ESTOY EN EL REINICIO")
          setnombre("");
         cantGanadaComputadora=0;
         cantGanadaUsuario=0;
@@ -121,7 +121,7 @@ function JuegoPPT(){
                 <button id="tijera" onClick={()=> opcionJugar("tijera")}  type="button">
                     <img src={tijera} alt="una tijera"/>
                 </button>
-                <button id="resetiar" type="reset" onClick={()=>reinicio}>
+                <button id="resetiar" onClick={reinicio} type="button">
                     <img src={resetear} alt="resetear"/>
                 </button>
             </div>
