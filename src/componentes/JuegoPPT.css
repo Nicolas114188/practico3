@@ -1,11 +1,15 @@
 .Nombre-jugador{
     display: flex;
+    align-items: center;
     gap: 8px;
 }
 p{
     font-size: 20px;
 }
-
+#nombre{
+    max-width: 150px;
+    max-height: 30px;
+}
 .grupo-btn{
     max-width: 520px;
     margin: 0 auto;
@@ -17,4 +21,15 @@ p{
     cursor: pointer;
     width: 100%;
     margin-top: 16px; 
+    animation-name: rotacion;
+    animation-duration: 10s;
+}
+/*En este item se agranda los botones y cambia de fondo */
+.grupo-btn>button:hover{
+    transform: scale(1.5);
+}
+/*Rota las imagen 360grados*/
+@keyframes rotacion{
+    from{transform: rotateZ(0deg);}
+    to{transform: rotateZ(360deg);}
 }

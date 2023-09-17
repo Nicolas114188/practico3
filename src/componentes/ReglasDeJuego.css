@@ -1,0 +1,10 @@
+.contenedor{
+    display: flex;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.imagen-ref{
+    width: 100%;
+    margin-top: 100px;
+}

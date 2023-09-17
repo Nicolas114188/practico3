@@ -1,5 +1,24 @@
 .App {
   text-align: center;
+  background-color: rgb(138, 214, 214);
+}
+.Contenedor{
+  width: 80%;
+  height: 700px;
+  margin: 0 auto;
+  border: 10px solid var(--clr-dark);
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+.item{
+  width: 600px;
+  height: 550px;
+  background-color:rgb(185, 175, 175);
+  padding: 1em;
+  font-weight: 700;
+  color: var(--clr-light);
+  border: 10px solid var(--clr-accent);
 }
 
 

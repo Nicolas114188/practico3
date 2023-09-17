@@ -114,9 +114,9 @@ function JuegoPPT(){
         <form ref={form}>
             <div className="Nombre-jugador"> 
                 <p>Nombre del jugador: </p>
-                <input id="nombre" type="text" value={nombre} onChange={nombreUsuario}/>
-                
+                <input id="nombre" type="text" value={nombre} onChange={nombreUsuario}/>             
             </div>
+            <hr/>
             <div className="grupo-btn">           
                 <button id="piedra" onClick={()=> opcionJugar("piedra")}  type="button" >
                     <img src={piedra} alt="una piedra"/>                 
@@ -131,7 +131,8 @@ function JuegoPPT(){
                     <img src={resetear} alt="resetear"/>
                 </button>
             </div>
-            <div>
+            <hr/>
+            <div className="resultado-partida">
                 <p>La computadora elegio: {impJuCompu}</p>
                 <p>El Usuario elegio: {impJuUsuario} </p>
                 <p>El Resultado es: {impGanador}</p>
