@@ -24,7 +24,7 @@ El objetivo es vencer al oponente seleccionando el arma que gana, según las sig
 
 ![reglas](https://upload.wikimedia.org/wikipedia/commons/1/1d/Piedra_papel_tijeras.jpg)
 
-##Construcción ✍:
+## Construcción ✍:
 primer paso: instalar Node.js, actualizar npm y un manejador de codigo con su pluing necesario
 
 segundo paso: Crear una carpeta y aconsejable es vincularla o tener un repositorio en [github](https://pages.github.com/#vanilla-step-1)
