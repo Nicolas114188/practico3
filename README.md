@@ -42,7 +42,7 @@ _las herramientas que se utilizaron para crear el proyecto_
 * [Animación](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitionsUsing_CSS_transitions) -animación css
 * [React](https://es.react.dev/learn) - pagina de guia 
 
-##Mejorar 👍:
+## Mejorar 👍:
 Este trabajo para su mantención necesita mejoras en su funcionalidad y en el estado de los componentes.
 
 ## Autor ✒️
